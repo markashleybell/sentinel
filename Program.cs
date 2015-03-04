@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -11,12 +12,11 @@ namespace sentinel
     {
         static void Main(string[] args)
         {
-            var watchDirectories = new List<string> {
-                
-            };
+            var watchDirectories = ConfigurationManager.AppSettings["folders"].Split('|').ToList();
 
             watchDirectories.ForEach(path => CreateWatcher(path));
 
+            Console.WriteLine("Watching...");
             Console.ReadLine();
         }
 
