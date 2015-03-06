@@ -26,37 +26,16 @@ namespace sentinel
             watcher.Path = path;
             watcher.IncludeSubdirectories = true;
             watcher.EnableRaisingEvents = true;
-            // watcher.NotifyFilter = NotifyFilters.
 
-            watcher.Created += watcher_Created;
-            watcher.Changed += watcher_Changed;
-            watcher.Deleted += watcher_Deleted;
-            watcher.Renamed += watcher_Renamed;
+            watcher.Created += (sender, e) => WriteLogLine(e);
+            watcher.Changed += (sender, e) => WriteLogLine(e);
+            watcher.Deleted += (sender, e) => WriteLogLine(e);
+            watcher.Renamed += (sender, e) => WriteLogLine(e);
         }
 
         static void WriteLogLine(FileSystemEventArgs e)
         {
             Console.WriteLine("{0,10}     {1,-10}", e.ChangeType.ToString().ToUpper(), e.FullPath);
-        }
-
-        static void watcher_Created(object sender, FileSystemEventArgs e)
-        {
-            WriteLogLine(e);
-        }
-
-        static void watcher_Changed(object sender, FileSystemEventArgs e)
-        {
-            WriteLogLine(e);
-        }
-
-        static void watcher_Deleted(object sender, FileSystemEventArgs e)
-        {
-            WriteLogLine(e);
-        }
-
-        static void watcher_Renamed(object sender, FileSystemEventArgs e)
-        {
-            WriteLogLine(e);
         }
     }
 }
