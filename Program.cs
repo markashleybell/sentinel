@@ -16,7 +16,12 @@ namespace sentinel
 
             watchDirectories.ForEach(path => CreateWatcher(path));
 
-            Console.WriteLine("Watching...");
+            Console.WriteLine();
+            Console.WriteLine("Watching:");
+
+            watchDirectories.ForEach(dir => Console.WriteLine("  " + dir));
+
+            Console.WriteLine();
             Console.ReadLine();
         }
 
